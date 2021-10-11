@@ -1,0 +1,36 @@
+/* ================================================== */
+/* Key table */
+
+.key-table > tbody > tr {
+    background-color: white;
+}
+
+.key-table > tbody > tr:hover {
+    background-color: #f0f0f0;
+}
+
+.key-table > tbody > tr > td {
+    height: 100%;
+    font-family:verdana;
+    padding: 0 !important;
+    position: relative;
+}
+
+.key-table > tbody > tr > td > div {
+    /*width: calc(100% - 30px);*/
+    height: 100%;
+    padding: 10px;
+}
+
+.delete-button {
+    color: grey;
+    width: 25px;
+    position: absolute;
+    top: 7px;
+    right: 0;
+    padding: 0 !important;
+}
+
+.delete-button:hover {
+    color: #cc0000;
+}

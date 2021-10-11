@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memcached GUI - Keys</title>
+    <!-- CSS only -->
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/shared.css" rel="stylesheet">
+    <link href="css/namespace/keytable.css" rel="stylesheet">
+    <link href="css/namespace/searchbar.css" rel="stylesheet">
+    <link href="css/namespace/pagination.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Memcached GUI</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <!-- Control panel -->
+    <div class="cb-container cb-row">
+        <div class="cb-column-left">
+            <div class="search-container">
+                <input id="search-term" type="text" placeholder="Search.." class="search-input">
+                <button class="search-button" onclick="searchTerm()"><img src="assets/search.png"  alt="icon" width="20" height="20"></i></button>
+            </div>
+        </div>
+        <div class="cb-column-right">
+            <button id="b-delete" type="button" class="cb-button" onclick="deleteNamespace()">Delete Namespace</button>
+        </div>
+    </div>
+
+    <!-- Info bar -->
+    <div class="info-bar">
+        <div class="ib-row">
+            <div class="ib-column-left">
+                <div class="ib-breadcrumb-container">
+                    <a href="/">Home</a>
+                    <span> > </span>
+                    <a th:href="'/namespace?id=' + ${namespace} + '&page=1'" th:text="${namespace}">asd</a>
+                    <span th:text="${searchTerm} != null ? ' > search for: ' + ${searchTerm} + '   ' : ''"></span>
+                </div>
+            </div>
+            <div class="ib-column-right">
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content-container" style="height: 78vh;">
+        <div style="text-align: center;">
+            <div th:each="key : ${pagination}" class="pagination">
+                <a th:if="${key.value}" class="active" th:href="'/namespace?id=' + ${namespace} + '&page=' + ${key.key}" th:text="${key.key}">1</a>
+                <a th:unless="${key.value}" th:href="'/namespace?id=' + ${namespace} + '&page=' + ${key.key}" th:text="${key.key}">1</a>
+            </div>
+        </div>
+
+        <table id="keys-table" class="table table-bordered key-table">
+            <thead>
+            <tr>
+                <th scope="col">Key-Name</th>
+                <th scope="col">Size</th>
+                <th scope="col">Age</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody th:each="key : ${keys}">
+            <tr th:id="${key.name}">
+                <td>
+                    <div class="clickable" th:text="${key.name}" th:attr="onclick='getValue(\'' + ${key.name}+  '\');'">ID</div>
+                </td>
+                <td style="width: 200px;">
+                    <div th:text="${key.memSizeAsString}">Memory</div>
+                </td>
+                <td style="width: 200px;">
+                    <div th:text="${key.age}">Age</div>
+                </td>
+                <td style="width: 40px;">
+                    <div class="delete-button clickable" th:attr="onclick='deleteKey(\'' + ${key.name}+  '\');'">x</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div style="text-align: center;">
+            <div th:each="key : ${pagination}" class="pagination">
+                <a th:if="${key.value}" class="active" th:href="'/namespace?id=' + ${namespace} + '&page=' + ${key.key}" th:text="${key.key}">1</a>
+                <a th:unless="${key.value}" th:href="'/namespace?id=' + ${namespace} + '&page=' + ${key.key}" th:text="${key.key}">1</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div id="close-container">
+                <span id="close-span" class="close-button clickable">&times;</span>
+            </div>
+            <h6>Key:</h6>
+            <label>
+                <span id="value-namespace">namespace</span>
+                >
+                <span id="value-key">key</span>
+            </label>
+            <h6>Value:</h6>
+            <div id="value-container">
+                <p id="value-text"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="js/jquery/jquery.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/namespace.js"></script>
+</body>
+</html>

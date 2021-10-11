@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  memcached-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - "MEMCACHED_HOSTS=memcached:11211"
+      - "MEMCACHED-UI_KEY_STRUCTURE=NAMESPACE:TIMESTAMP:KEY"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "populate"
+  populate:
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+    depends_on:
+      - "memcached"
+  memcached:
+    image: "memcached:1.6"
+    ports:
+      - "11211:11211"

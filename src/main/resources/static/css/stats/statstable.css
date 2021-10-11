@@ -1,0 +1,29 @@
+/* ================================================== */
+/* Stats table */
+
+.stats-label-col {
+    width: 25%;
+}
+
+.stats-value-col {
+    width: 75%;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    height: 20px;
+    text-align: center;
+}
+
+#memory-usage {
+    height: 40px;
+    width: 450px;
+    margin-left: 0;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}

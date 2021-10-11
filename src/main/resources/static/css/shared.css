@@ -1,0 +1,162 @@
+/* ================================================== */
+/* General */
+
+* {
+    box-sizing: border-box;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.main-content-container {
+    padding: 20px;
+    overflow-y: scroll;
+    height:82vh;
+    min-height: 250px;
+    background-color: #fafafa;
+}
+
+/* ================================================== */
+/* Control Bar */
+
+.cb-container {
+    height: 70px;
+    border-style: none none solid none;
+    border-color: #bababa;
+    border-width: 1px;
+}
+
+.cb-column-left {
+    height: 100%;
+    float: left;
+    width: 50%;
+    padding: 10px 10px 10px 25px;
+}
+.cb-column-right {
+    height: 100%;
+    text-align: right;
+    float: left;
+    width: 50%;
+    padding: 10px 25px 10px 10px;
+}
+
+.cb-row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.cb-button {
+    color: white;
+    font-size: 17px;
+    height: 37px;
+    max-width: 200px;
+    margin-top: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #5981ec;
+}
+
+.cb-button:hover {
+    background-color: #4365c9;
+}
+
+/* ================================================== */
+/* Info Bar */
+
+.info-bar {
+    height: 35px;
+    border-style: none none solid none;
+    border-color: #bababa;
+    border-width: 1px;
+}
+
+.ib-row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.ib-column-left {
+    height: 100%;
+    float: left;
+    width: 50%;
+    padding-left: 25px;
+}
+
+.ib-column-right {
+    height: 100%;
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+/* ================================================== */
+/* Breadcrumb */
+
+.ib-breadcrumb-container {
+    padding-left: 10px;
+}
+
+.ib-breadcrumb-container > span,
+.ib-breadcrumb-container > a {
+    font-weight: 450;
+    font-size: 20px;
+    color: #5981ec;
+}
+
+.ib-breadcrumb-container > a:hover {
+    color: #4365c9;
+}
+
+/*==================================================*/
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+#close-container {
+    text-align: right;
+}
+
+/* The Close Button */
+.close-button {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+#value-container {
+    background-color: #f3f3f7;
+    padding: 5px;
+    border: 1px solid #d0d0d7;
+    display:block;
+    word-wrap:break-word;
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memcached GUI - Stats</title>
+    <!-- CSS only -->
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/shared.css" rel="stylesheet">
+    <link href="css/stats/statstable.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Memcached GUI</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <!-- Control panel -->
+    <div class="cb-container cb-row">
+        <div class="cb-column-stats-label-col"></div>
+        <div class="cb-column-stats-value-col"></div>
+    </div>
+
+    <!-- Info bar -->
+    <div class="info-bar">
+        <div class="ib-row">
+            <div class="ib-column-stats-label-col">
+                <div class="ib-breadcrumb-container">
+                    <a href="/">Home</a>
+                    <span> > </span>
+                    <a href="/stats">Statistics</a>
+                </div>
+            </div>
+            <div class="ib-column-stats-value-col">
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content-container">
+
+        <h5>General</h5>
+
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <td class="stats-label-col">
+                    <div>Uptime</div>
+                </td>
+                <td class="stats-value-col">
+                    <div th:text="${stats.get('uptime')}">Value</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="stats-label-col">
+                    <div>Version</div>
+                </td>
+                <td class="stats-value-col">
+                    <div th:text="${stats.get('version')}">Value</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h5>Memory</h5>
+
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <td class="stats-label-col">
+                    <div>Usage</div>
+                </td>
+                <td class="stats-value-col">
+                    <div id="memory-usage" class="row">
+                        <div id="used-memory-bar" class="column" style=" width: 50%;">
+                            <div style="background-color: limegreen; height: 20px;"></div>
+                            <div id="used-memory-percentage">50%</div>
+                        </div>
+                        <div id="free-memory-bar" class="column" style="width: 50%;">
+                            <div style="background-color: lightgrey; height: 20px;"></div>
+                            <div id="free-memory-percentage">50%</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="stats-label-col">
+                    <div>Used</div>
+                </td>
+                <td class="stats-value-col">
+                    <span style="background-color: limegreen; border: 1px solid black; font-size: 14px; margin-right: 5px;">&nbsp &nbsp &nbsp</span>
+                    <span th:text="${stats.get('used_memory')}">Value</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="stats-label-col">
+                    <div>Free</div>
+                </td>
+                <td class="stats-value-col">
+                    <span style="background-color: lightgrey; border: 1px solid black; font-size: 14px; margin-right: 5px;">&nbsp &nbsp &nbsp</span>
+                    <span th:text="${stats.get('free_memory')}">Value</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="stats-label-col">
+                    <div>Total</div>
+                </td>
+                <td class="stats-value-col">
+                    <div th:text="${stats.get('total_memory')}">Value</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h5>Items</h5>
+
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <td class="stats-label-col">
+                    <div>Current</div>
+                </td>
+                <td class="stats-value-col">
+                    <div th:text="${stats.get('current_items')}">Value</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="stats-label-col">
+                    <div>Total</div>
+                </td>
+                <td class="stats-value-col">
+                    <div th:text="${stats.get('total_items')}">Value</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h5>Connections</h5>
+
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <td class="stats-label-col">
+                    <div>Current</div>
+                </td>
+                <td class="stats-value-col">
+                    <div th:text="${stats.get('curr_connections')}">Value</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="stats-label-col">
+                    <div>Total</div>
+                </td>
+                <td class="stats-value-col">
+                    <div th:text="${stats.get('total_connections')}">Value</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="stats-label-col">
+                    <div>Max</div>
+                </td>
+                <td class="stats-value-col">
+                    <div th:text="${stats.get('max_connections')}">Value</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="js/jquery/jquery.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/shared.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var stats = /*[[${stats}]]*/ {};
+        var usedMemoryPercentageValue = parseFloat(stats['used_memory_percentage']);
+        var freeMemoryPercentageValue = parseFloat(stats['free_memory_percentage']);
+
+        var usedMemoryBar = $("#used-memory-bar");
+        var usedMemoryPercentage = $("#used-memory-percentage");
+        var freeMemoryBar = $("#free-memory-bar");
+        var freeMemoryPercentage = $("#free-memory-percentage");
+
+        usedMemoryBar.css("width", usedMemoryPercentageValue + "%");
+        usedMemoryPercentage.html(usedMemoryPercentageValue + "%");
+        freeMemoryBar.css("width", freeMemoryPercentageValue + "%");
+        freeMemoryPercentage.html(freeMemoryPercentageValue + "%");
+        /*]]>*/
+    </script>
+</body>
+</html>

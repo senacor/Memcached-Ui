@@ -1,0 +1,21 @@
+/* ================================================== */
+/* Search Bar */
+
+.search-input {
+    height: 37px;
+    margin-top: 5px;
+}
+
+.search-button {
+    font-size: 17px;
+    height: 37px;
+    width: 37px;
+    margin-top: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #5981ec;
+}
+
+.search-button:hover {
+    background-color: #4365c9;
+}

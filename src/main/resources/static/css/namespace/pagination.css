@@ -1,0 +1,26 @@
+/* ================================================== */
+/* Pagination */
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 6px 12px;
+    text-decoration: none;
+}
+.pagination span {
+    color: black;
+    float: left;
+    padding: 6px 12px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #5981ec;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}

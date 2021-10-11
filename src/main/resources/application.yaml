@@ -1,0 +1,20 @@
+
+server:
+  servlet:
+    context-path: /
+
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+
+memcached-ui:
+  key:
+    structure: KEY
+
+memcached:
+  reconnect:
+    enabled: false
+    interval:
+      millis: 5000
+  hosts: localhost:11211

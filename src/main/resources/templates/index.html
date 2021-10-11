@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memcached GUI</title>
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.png">
+    <!-- CSS only -->
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/shared.css" rel="stylesheet">
+    <link href="css/home/namespace-grid.css" rel="stylesheet">
+    <link href="css/home/actions-menu.css" rel="stylesheet">
+    <link href="css/home/loader.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Memcached GUI</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <!-- Control bar -->
+    <div class="cb-container cb-row">
+        <div class="cb-column-left">
+            <div style="padding-top: 10px;">
+                <img class="namespace-metric-icon" src="assets/caution.png" alt="icon" width="30" height="25">
+                <span>CAUTION: All delete functions are now enabled!</span>
+            </div>
+        </div>
+        <div class="cb-column-right">
+            <div class="dropdown">
+                <button onclick="openActionsMenu()" class="dropbtn">
+                    Actions
+                    <img class="namespace-metric-icon" src="assets/drop-down.png" alt="icon" width="12" height="8">
+                </button>
+                <div id="actions-menu" class="dropdown-content">
+                    <div class="dropdown-option clickable" onclick="refresh()">Refresh</div>
+                    <div class="dropdown-option clickable" onclick="flush()">Flush</div>
+                    <div class="dropdown-option clickable" onclick="openStats()">Statistics</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info bar -->
+    <div class="info-bar">
+        <div class="ib-row">
+            <div class="ib-column-left">
+                <div class="ib-breadcrumb-container">
+                    <a href="/">Home</a>
+                </div>
+            </div>
+            <div class="ib-column-right">
+                <img class="namespace-metric-icon" src="assets/key.png" alt="icon" width="25" height="25">
+                <label style="margin-top: 3px; margin-right: 10px;" th:text="${keysNumber}">number</label>
+                <img class="namespace-metric-icon" src="assets/ram.png" alt="icon" width="25" height="25">
+                <label style="margin-top: 3px;" th:text="${memSize}">memory</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content-container">
+        <div class="namespace-grid">
+            <div class="grid-element-container" th:each="namespace : ${namespaces}">
+                <div class="namespace clickable" th:attr="onclick='openNamespace(\'' + ${namespace.name}+  '\');'">
+                    <label class="namespace-name clickable" th:text="${namespace.name}">namespace</label>
+                    <div class="namespace-metrics-container">
+                        <img class="namespace-metric-icon" src="assets/key.png" alt="icon" width="25" height="25">
+                        <span class="namespace-metric-value" th:text="${namespace.size}">value</span>
+                        <img class="namespace-metric-icon" src="assets/ram.png" alt="icon" width="25" height="25">
+                        <span class="namespace-metric-value" th:text="${namespace.memSizeAsString}">value</span>
+                    </div>
+                </div>
+                <div class="delete-button clickable" th:attr="onclick='deleteNamespace(\'' + ${namespace.name}+  '\');'">x</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div style="margin: auto; margin-top: 25vh;" class="loader"></div>
+    </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="js/jquery/jquery.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/actions-menu.js"></script>
+</body>
+</html>
