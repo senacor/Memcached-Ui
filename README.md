@@ -33,8 +33,7 @@ delete entries based on their namespace, or flush the entire cache.
 ## Getting Started
 
 The simplest way to start the service is to build the docker image and start the memcached-ui
-container. The other option would be to build the project locally using maven and execute
-the `.jar` file.
+container.
 
 ### Prerequisites
 
@@ -53,7 +52,7 @@ the `.jar` file.
    cd memcached-ui
 ```
 
-3. Build the Docker image use the `build` command
+3. Build the Docker image using the `build` command
 ```sh
    docker build -t memcached-ui -f Dockerfile_local .
 ```
